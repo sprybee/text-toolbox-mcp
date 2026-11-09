@@ -1,0 +1,26 @@
+{
+  "repo_url": "https://github.com/sprybee/text-toolbox-mcp.git",
+  "ref": "main",
+  "configuration": {
+    "schemaVersion": 1,
+    "name": "text-toolbox-mcp",
+    "language": "python",
+    "runtime": "python3.10",
+    "entrypoint": "text_toolbox_mcp.server",
+    "mcpObject": "mcp",
+    "description": "无需业务密钥的纯文本工具：统计文本、计算 SHA-256、按首次出现顺序清理重复行，无外部读写副作用。",
+    "server": {"port": 9000, "path": "/mcp", "stateless": true, "gatewayAuth": false},
+    "resources": {"memoryMB": 512, "timeoutSeconds": 120},
+    "config": [],
+    "downstream": [],
+    "presentation": {
+      "displayName": "文本工具箱 MCP",
+      "category": "开发工具",
+      "readme": "# 文本工具箱 MCP\n\n基于官方 MCP Python SDK 的无状态文本服务，无需业务密钥。\n\n## 工具\n\n- text_stats(text: str)：返回 Unicode 码点数、UTF-8 字节数、按空白切分的词数、行数。空输入行数为零，末尾换行不增加空行；不执行中文分词。\n- sha256_text(text: str)：返回原始 UTF-8 文本的 SHA-256 十六进制摘要、算法名和编码名；不归一化输入。哈希不是加密，不用于密码存储。\n- deduplicate_lines(text: str, case_sensitive: bool = true)：保留首次出现行和原始拼写，返回结果文本、输入/输出行数和删除行数；保留行内空白，忽略大小写时使用 Unicode casefold。输出统一为 LF，保留输入的末尾换行。\n\n## 限制与权限\n\n输入最多 100,000 个 Unicode 码点，超限返回工具错误。孤立代理字符不能编码为 UTF-8 时返回工具错误。不执行输入、不访问外部网络、不读写文件、不在应用中持久化文本；客户端和平台的日志策略另行管理，请勿传入机密数据。无需业务环境变量或下游授权，访问权限由 Hub 网关管理。\n\n## 部署\n\nPython 3.10，入口 text_toolbox_mcp.server:mcp，官方 mcp>=1.26,<2。平台托管无状态 Streamable HTTP，端口 9000，路径 /mcp。\n",
+      "icon": null
+    }
+  },
+  "tag_ids": [],
+  "inspection_id": null,
+  "touched_fields": ["name", "language", "runtime", "entrypoint", "mcpObject", "description", "server", "resources", "config", "downstream", "presentation.displayName", "presentation.category", "presentation.readme"]
+}

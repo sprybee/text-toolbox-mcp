@@ -1,0 +1,14 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "text-toolbox-mcp"
+version = "0.1.0"
+description = "Side-effect-free text utilities for MCP Hub"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["mcp>=1.26,<2"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/text_toolbox_mcp"]
